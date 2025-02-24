@@ -11,17 +11,20 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 include_directories(include)
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
-    src/*.cpp
-)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(SudokuSolver ${SOURCES})
+file(GLOB_RECURSE APP_SOURCES CONFIGURE_DEPENDS
+    src/*.cpp
+)
+list(FILTER APP_SOURCES EXCLUDE REGEX "src/main.cpp")
+
+add_executable(SudokuSolver src/main.cpp ${APP_SOURCES})
 
 if (UNIX)
     target_link_libraries(SudokuSolver pthread)
 endif()
 
 
-# add_subdirectory(tests)
+enable_testing()
+add_subdirectory(tests)
