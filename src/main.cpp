@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "SudokuBoard.hpp"
 
 int main()
 {
