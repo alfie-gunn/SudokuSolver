@@ -7,16 +7,17 @@
 class SudokuBoard {
 private:
     int boardValues[9][9];
-    void fromString(std::string& source);
 
 public:
     SudokuBoard();
-    ~SudokuBoard();
+    SudokuBoard(std::string& source);
+    SudokuBoard(char* source);
 
     void setValue(int x, int y, int value);
     int getValue(int x, int y);
 
     std::string toString();
+    void fromString(char* source);
 };
 
 #endif // SUDOKUBOARD_HPP  

@@ -9,11 +9,12 @@ SudokuBoard::SudokuBoard()
             this->setValue(x, y, 0);
         }
     }
-
 }
 
-SudokuBoard::~SudokuBoard()
+SudokuBoard::SudokuBoard(char *source)
 {
+    SudokuBoard();
+    this->fromString(source);
 }
 
 void SudokuBoard::setValue(int x, int y, int value)
@@ -51,25 +52,23 @@ int SudokuBoard::getValue(int x, int y)
     return this->boardValues[y][x];
 }
 
-void SudokuBoard::fromString(std::string& source)
+void SudokuBoard::fromString(char *source)
 {
-    // Read in char
-    // Char to int
-    // Int into location
-    // Repeat
-    // Make sure to bounds check the size of the source and the value in the char
-    // Valid chars are '0' through '9'
-    if (source.length() != 81)
-    {
-        throw std::runtime_error("Source string is not 81 chars");
-    }
+    int lengthCounter = 0;
 
-    for (size_t i = 0; i < source.length(); i++)
+    for (int i = 0; source[i] != '\0'; i++)
     {
+        lengthCounter++;
+        if (lengthCounter > 81)
+        {
+            throw std::runtime_error("Source input exceeds 81 char limit");
+        }
+
         char c = source[i];
         int x = i % 9;
         int y = i / 9;
         int num = c - '0';
+
         if (num < 0 || num > 9)
         {
             throw std::runtime_error("Num exceeds limits: 0, 9 inclusive");
@@ -78,6 +77,11 @@ void SudokuBoard::fromString(std::string& source)
         {
             this->setValue(x, y, num);
         }
+    }
+
+    if (lengthCounter < 81)
+    {
+        throw std::runtime_error("Source input does not meet 81 char requirement");
     }
 }
 
