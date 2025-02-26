@@ -10,7 +10,6 @@ private:
 
 public:
     SudokuBoard();
-    SudokuBoard(std::string& source);
     SudokuBoard(char* source);
 
     void setValue(int x, int y, int value);
@@ -18,6 +17,7 @@ public:
 
     std::string toString();
     void fromString(char* source);
+    void displayBoard();
 };
 
 #endif // SUDOKUBOARD_HPP  

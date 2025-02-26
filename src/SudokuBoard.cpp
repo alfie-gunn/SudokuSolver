@@ -99,3 +99,15 @@ std::string SudokuBoard::toString()
 
     return ss.str();
 }
+
+void SudokuBoard::displayBoard()
+{
+    for (int y = 0; y < 9; y++)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            printf("%d ", this->getValue(x, y));
+        }
+        printf("\n");
+    }
+}
